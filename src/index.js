@@ -87,6 +87,7 @@ let render = () => {
 $(document).ready(() => {
   render();
   updateBrushDisplay();
+  new Clipboard('.btn');
   $('body').on('click', '.bodypart', updateBodyPart);
   $('#brushDisplay').on('input', updateBrush);
 });

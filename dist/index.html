@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="https://use.fontawesome.com/c0f88dee2c.js"></script>
 		<script src="//twemoji.maxcdn.com/2/twemoji.min.js?2.3.0"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
 	</head>
 	<body>
 		<main class="container">
@@ -16,7 +17,11 @@
 					<div contenteditable="true" placeholder = "Type here" id = "my-text-input"></div>
 					<i class="fa fa-paint-brush" id = "my-icon" aria-hidden="true"></i><input id="brushDisplay" type="text">
 				</div>
+				<button class="btn" data-clipboard-target="#mySheriff">
+					<i class="fa fa-clipboard" aria-hidden="true"></i>
+				</button>
 			</div>
+			
 		</main>
 		<script src="bundle.js"></script>
 	</body>
