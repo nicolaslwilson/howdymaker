@@ -4,6 +4,12 @@ import 'rm-emoji-picker/dist/emojipicker.css';
 import './style.css';
 
 const picker = new EmojiPicker({
+    sheets: {
+        apple   : '/sheets/sheet_apple_64_indexed_128.png',
+        google  : '/sheets/sheet_google_64_indexed_128.png',
+        twitter : '/sheets/sheet_twitter_64_indexed_128.png',
+        emojione: '/sheets/sheet_emojione_64_indexed_128.png'
+    },
     callback: (emoji, category, node) => {
       emojiBrush = emoji.$emoji[0].innerText;
       updateBrushDisplay();
@@ -31,13 +37,13 @@ class sheriff {
   draw () {
     let spans = this.parts.map((c,i) => {return `<span id='${i}' class='bodypart  ${c.organ}'>${c.emoji}</span>`;});
     let output = 
-`⠀ ⠀⠀        ⠀⠀  ${spans[0]}\r` +
-`　　　　　${spans[3] + spans[4]  + spans[5] }\r` +
-`　　　　${spans[6] } 　${spans[7] }　${spans[8] }\r` +
-`　　　${spans[1]}　  ${spans[9] + spans[10]}　${spans[1]}\r` +
-`　　　　　${spans[11]}　  ${spans[12]}\r` +
-`　　　　　${spans[13]}　　${spans[14]}\r` +
-`　　　　　 ${spans[2]}　　${spans[2]}\r`
+`           ${spans[0]}\r` +
+`      ${spans[3] + spans[4]  + spans[5]}\r` +
+`   ${spans[6]}   ${spans[7]}    ${spans[8]}\r` +
+`${spans[1]}   ${spans[9] + spans[10]}     ${spans[1]}\r` +
+`     ${spans[11]}    ${spans[12]}\r` +
+`    ${spans[13]}      ${spans[14]}\r` +
+`     ${spans[2]}      ${spans[2]}\r`
   return twemoji.parse(output);
   }
   updateBodyPart (index, emoji) {

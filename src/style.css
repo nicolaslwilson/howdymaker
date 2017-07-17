@@ -1,15 +1,16 @@
 body {
-	font-size: 1.6em;
+
 }
 
 .container {
-	max-width: 500px;
 	padding: 1em;
 	margin: 0 auto;
 }
 
 #mySheriff {
+	max-width: 200px;
 	margin: 0 auto;
+	font-size: 1.6em;
 }
 
 #mySheriff p {
