@@ -87,7 +87,14 @@ let render = () => {
 $(document).ready(() => {
   render();
   updateBrushDisplay();
-  new Clipboard('.btn');
+  if (Clipboard.isSupported()) {
+      new Clipboard('.btn');
+  } else {
+     $('.btn').on('click', () => {
+        window.getSelection().selectAllChildren( document.getElementById( 'mySheriff' ) );
+      });
+  }
   $('body').on('click', '.bodypart', updateBodyPart);
   $('#brushDisplay').on('input', updateBrush);
+ 
 });
