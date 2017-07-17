@@ -13,7 +13,8 @@ const picker = new EmojiPicker({
     callback: (emoji, category, node) => {
       emojiBrush = emoji.$emoji[0].innerText;
       updateBrushDisplay();
-    }
+    },
+    use_sheets : true
   }
 );
 
