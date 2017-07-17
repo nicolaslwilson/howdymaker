@@ -63,9 +63,12 @@ let updateBodyPart = function () {
   render();
 }
 
+let updateBrush = function () {
+  emojiBrush = $('#brushDisplay').val();
+}
+
 let updateBrushDisplay = function () {
-  $('#brushDisplay').empty();
-  $('#brushDisplay').append(emojiBrush);
+  $('#brushDisplay').val(emojiBrush);
 }
 
 let render = () => {
@@ -85,4 +88,5 @@ $(document).ready(() => {
   render();
   updateBrushDisplay();
   $('body').on('click', '.bodypart', updateBodyPart);
+  $('#brushDisplay').on('input', updateBrush);
 });

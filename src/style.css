@@ -38,6 +38,14 @@ body {
 	cursor: pointer;
 }
 
+#brushDisplay {
+	display: inline-block;
+	width: 2em;
+	border-radius: 1em;
+	text-align: center;
+}
+
+
 img.emoji {
    height: 1em;
    width: 1em;
