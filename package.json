@@ -4,7 +4,7 @@
   "description": "sheriff emoji art tool",
   "main": "app.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack -p",
     "watch": "webpack --watch",
     "start": "webpack-dev-server --open"
   },
