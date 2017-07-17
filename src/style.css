@@ -1,0 +1,45 @@
+body {
+	font-size: 1.6em;
+}
+
+.container {
+	max-width: 500px;
+	padding: 1em;
+	margin: 0 auto;
+}
+
+#mySheriff {
+	margin: 0 auto;
+}
+
+#mySheriff p {
+  white-space: pre;
+}
+
+
+#my-container {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	max-width: 5em;
+}
+
+#my-text-input {
+	display: block;
+	height: 0;
+	width: 0;
+}
+
+#icon{
+	color: #000;
+}
+#icon:hover{
+	cursor: pointer;
+}
+
+img.emoji {
+   height: 1em;
+   width: 1em;
+   margin: 0 .05em 0 .1em;
+   vertical-align: -0.1em;
+}
