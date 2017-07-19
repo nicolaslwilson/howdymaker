@@ -1,22 +1,5 @@
-// import $ from 'jquery';
-import EmojiPicker from "rm-emoji-picker";
-import 'rm-emoji-picker/dist/emojipicker.css';
+import emojiList from './emoji.js';
 import './style.css';
-
-const picker = new EmojiPicker({
-    sheets: {
-        apple   : '/sheets/sheet_apple_64_indexed_128.png',
-        google  : '/sheets/sheet_google_64_indexed_128.png',
-        twitter : '/sheets/sheet_twitter_64_indexed_128.png',
-        emojione: '/sheets/sheet_emojione_64_indexed_128.png'
-    },
-    callback: (emoji, category, node) => {
-      emojiBrush = emoji.$emoji[0].innerText;
-      updateBrushDisplay();
-    },
-    use_sheets : true
-  }
-);
 
 class BodyPart {
   constructor (organ, emoji = "🙃") {
@@ -35,16 +18,16 @@ class sheriff {
     while(corpus.length < 13) { corpus.push(new BodyPart('body', body)); }
     this.parts = this.parts.concat(corpus);
   }
-  draw () {
+  drawHTML () {
     let spans = this.parts.map((c,i) => {return `<span id='${i}' class='bodypart  ${c.organ}'>${c.emoji}</span>`;});
     let output = 
-`           ${spans[0]}\r` +
-`      ${spans[3] + spans[4]  + spans[5]}\r` +
-`   ${spans[6]}   ${spans[7]}    ${spans[8]}\r` +
-`${spans[1]}   ${spans[9] + spans[10]}     ${spans[1]}\r` +
-`     ${spans[11]}    ${spans[12]}\r` +
-`    ${spans[13]}      ${spans[14]}\r` +
-`     ${spans[2]}      ${spans[2]}\r`
+`<p>           ${spans[0]}\r\n` +
+`      ${spans[3] + spans[4]  + spans[5]}\r\n` +
+`   ${spans[6]}   ${spans[7]}    ${spans[8]}\r\n` +
+`${spans[1]}   ${spans[9] + spans[10]}     ${spans[1]}\r\n` +
+`     ${spans[11]}    ${spans[12]}\r\n` +
+`    ${spans[13]}      ${spans[14]}\r\n` +
+`     ${spans[2]}      ${spans[2]}\r\n</p>`
   return twemoji.parse(output);
   }
   updateBodyPart (index, emoji) {
@@ -56,45 +39,77 @@ let mySheriff = new sheriff();
 
 let emojiBrush =  "😽";
 
-let updateBodyPart = function () {
-  let $bodyPart = $(this);
-  let index = parseInt($(this).attr('id'));
-  mySheriff.updateBodyPart(index, emojiBrush, {});
-  render();
+let updateBrush = (event) => {
+  emojiBrush = event.target.value;
 }
 
-let updateBrush = function () {
-  emojiBrush = $('#brushDisplay').val();
-}
-
-let updateBrushDisplay = function () {
-  $('#brushDisplay').val(emojiBrush);
+let updateBrushDisplay = () => {
+  document.getElementById('brushDisplay').value = emojiBrush;
+  // $('#brushDisplay').val(emojiBrush);
 }
 
 let render = () => {
-  $('#mySheriff').empty();
-  let $p = $('<p>');
-  $p.append(mySheriff.draw());
-  $('#mySheriff').append($p);
-}
+  let mySheriffElement = document.getElementById('mySheriff');
+  mySheriffElement.innerHTML = (mySheriff.drawHTML());
+} 
 
-  const icon = document.getElementById('my-icon');
-  const container = document.getElementById('my-container');
-  const editable = document.getElementById('my-text-input');
-  picker.listenOn(icon, container, editable);
-  
-
-$(document).ready(() => {
-  render();
-  updateBrushDisplay();
+let clipboardSetup = () => {
   if (Clipboard.isSupported()) {
       new Clipboard('.btn');
   } else {
-     $('.btn').on('click', () => {
-        window.getSelection().selectAllChildren( document.getElementById( 'mySheriff' ) );
-      });
+    //  $('.btn').on('click', () => {
+    //     window.getSelection().selectAllChildren( document.getElementById( 'mySheriff' ) );
+    //   });
   }
-  $('body').on('click', '.bodypart', updateBodyPart);
-  $('#brushDisplay').on('input', updateBrush);
- 
+}
+
+let sheriffClickHandler = (event) => {
+  let bodyPart = event.target.classList.contains('bodypart') ? event.target : event.target.closest('.bodypart');
+  let isBodyPart = bodyPart.classList.contains('bodypart');
+  if (isBodyPart) {
+      let index = parseInt(bodyPart.id);
+      mySheriff.updateBodyPart(index, emojiBrush);
+      render();
+  }
+   
+}
+
+let setupEmojiPalette = () => {
+ let palette = document.getElementById('emojiPalette');
+ createEmojiPalette(palette);
+ setupEmojiPaletteEventListener(palette);
+}
+
+let createEmojiPalette = (palette) => {
+  emojiList.forEach(function(element) {
+      let e = document.createElement('span');
+      e.setAttribute('alt', element);
+      e.classList.add('emoji');
+      e.innerHTML = element;
+      palette.appendChild(e);
+  });
+  twemoji.parse(palette);
+}
+
+let setupEmojiPaletteEventListener = (palette) => {
+  palette.addEventListener('click',paletteClickEventHandler);
+};
+
+let paletteClickEventHandler = (event) => {
+  if (event.target.classList.contains('emoji')) {
+    let selectedEmoji = event.target.getAttribute('alt');
+    emojiBrush = selectedEmoji;
+    updateBrushDisplay();
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  render();
+  updateBrushDisplay();
+  clipboardSetup();
+  setupEmojiPalette();
+  let mySheriffElement = document.getElementById("mySheriff");
+  mySheriffElement.addEventListener('click', sheriffClickHandler);
+  let brushDisplay = document.getElementById('brushDisplay');
+  brushDisplay.addEventListener('input', updateBrush);
 });

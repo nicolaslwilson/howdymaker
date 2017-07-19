@@ -18,11 +18,21 @@ body {
 }
 
 
-#my-container {
+#interface{
 	position: relative;
 	display: block;
 	margin: 0 auto;
-	max-width: 5em;
+	max-width: 500px;
+	text-align: center;
+}
+
+#emojiPalette {
+	max-height: 250px;
+	overflow: scroll;
+}
+
+#emojiPalette .emojiSplotch {
+	margin: .2em;
 }
 
 #my-text-input {
