@@ -29,16 +29,11 @@ body {
 #emojiPalette {
 	max-height: 250px;
 	overflow: scroll;
+	display: none;
 }
 
 #emojiPalette .emojiSplotch {
 	margin: .2em;
-}
-
-#my-text-input {
-	display: block;
-	height: 0;
-	width: 0;
 }
 
 #icon{
@@ -53,6 +48,8 @@ body {
 	width: 2em;
 	border-radius: 1em;
 	text-align: center;
+	font-size: 1.3em;
+	margin: 0.3em;
 }
 
 

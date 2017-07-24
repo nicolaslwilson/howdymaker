@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
   render();
   updateBrushDisplay();
   clipboardSetup();
-  setupEmojiPalette();
+  // setupEmojiPalette();
   let mySheriffElement = document.getElementById("mySheriff");
   mySheriffElement.addEventListener('click', sheriffClickHandler);
   let brushDisplay = document.getElementById('brushDisplay');
